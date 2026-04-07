@@ -121,13 +121,13 @@
 
         function loadModel() {
             const mtlLoader = new THREE.MTLLoader();
-            //mtlLoader.setPath("{{ url_for('static', filename='models/') }}");
-            mtlLoader.load('https://umi-reco.main.jp/wp-content/uploads/3d-models/1/odm_textured_model_geo.mtl', function(materials) {
+            mtlLoader.setPath("/models/");
+            mtlLoader.load('odm_textured_model_geo.mtl', function(materials) {
                 materials.preload();
 
                 const objLoader = new THREE.OBJLoader();
                 objLoader.setMaterials(materials);
-                objLoader.setPath("{{ url_for('static', filename='models/') }}");
+                objLoader.setPath("/models/");
 
                 objLoader.load(
                     'odm_textured_model_geo.obj',
@@ -310,7 +310,7 @@
                     materials: materials,
                     preload: function() {
                         const loader = new THREE.TextureLoader();
-                        loader.setPath('/models/');
+                        loader.setPath("/models/");
                         for (let name in this.materials) {
                             if (this.materials[name].map) {
                                 this.materials[name].mapTexture = loader.load(this.materials[name].map);
